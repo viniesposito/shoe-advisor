@@ -52,7 +52,7 @@ export async function POST(request: Request) {
     
     // Query Pinecone
     console.log('Querying Pinecone...');
-    const index = pinecone.Index('running-shoes');
+    const index = pinecone.Index('shoe-videos');
     const queryResponse = await index.query({
       vector: embeddingResponse.data[0].embedding,
       topK: 3,
@@ -66,7 +66,7 @@ export async function POST(request: Request) {
     
     console.log('Getting shoe recommendations...');
     const response = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
+      model: "gpt-4-turbo-preview",
       messages: [
         { role: "system", content: SYSTEM_PROMPT },
         { role: "user", content: `Context:\n${context}\n\nUser Question: ${question}\n\nPlease provide recommendations based on the context above.` }
@@ -96,14 +96,19 @@ export async function POST(request: Request) {
     
     return NextResponse.json(finalResponse);
     
-  } catch (error) {
-    console.error('Request error:', error);
-    console.error('Error stack:', error instanceof Error ? error.stack : 'No stack trace');
+  } catch (err: unknown) {
+    const errorMessage = err instanceof Error ? err.message : 'Unknown error';
+    const errorStack = err instanceof Error ? err.stack : 'No stack trace';
+    const errorType = err instanceof Error ? err.constructor.name : 'Unknown';
+    
+    console.error('Request error:', errorMessage);
+    console.error('Error stack:', errorStack);
+    
     return NextResponse.json(
       { 
         error: 'Failed to process request', 
-        details: error instanceof Error ? error.message : 'Unknown error',
-        type: error.constructor.name
+        details: errorMessage,
+        type: errorType
       },
       { status: 500 }
     );
