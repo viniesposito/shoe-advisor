@@ -68,9 +68,9 @@ export default function Home() {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
-          // Add cache control headers
           'Cache-Control': 'no-cache, no-store, must-revalidate',
-          'Pragma': 'no-cache' },
+          'Pragma': 'no-cache' 
+        },
         body: JSON.stringify({ question: query }),
       });
       
@@ -92,32 +92,32 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-[#2D3047] px-4 py-12 font-mono lowercase flex flex-col">
+    <main className="min-h-screen bg-[#2D3047] px-4 py-8 md:py-12 font-mono lowercase flex flex-col">
       {/* Title Section */}
-      <div className="max-w-2xl mx-auto text-center mb-12">
-        <h1 className="text-5xl font-bold mb-4 text-[#FF9F1C]">
+      <div className="max-w-2xl mx-auto text-center mb-8 md:mb-12">
+        <h1 className="text-3xl md:text-5xl font-bold mb-3 md:mb-4 text-[#FF9F1C]">
           running shoe finder
         </h1>
-        <p className="text-[#E4D9FF] text-lg">
+        <p className="text-[#E4D9FF] text-base md:text-lg">
           enter your favorite shoes. discover your next pair.
         </p>
       </div>
 
       {/* Search Section */}
-      <div className="max-w-xl mx-auto mb-32">
-        <form onSubmit={handleSubmit} className="flex gap-3">
+      <div className="max-w-xl mx-auto mb-16 md:mb-32 w-full px-4">
+        <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-3">
           <input
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="nike pegasus, brooks ghost..."
-            className="flex-1 px-6 py-4 rounded-full border-2 border-[#FF9F1C] bg-[#1F2132] text-white placeholder:text-[#E4D9FF]/50 focus:outline-none focus:ring-2 focus:ring-[#FF9F1C] focus:border-transparent"
+            className="w-full md:flex-1 px-4 md:px-6 py-3 md:py-4 rounded-full border-2 border-[#FF9F1C] bg-[#1F2132] text-white placeholder:text-[#E4D9FF]/50 focus:outline-none focus:ring-2 focus:ring-[#FF9F1C] focus:border-transparent text-base"
             disabled={loading}
           />
           <button
             type="submit"
             disabled={loading}
-            className="group px-8 py-4 bg-[#FF9F1C] text-[#2D3047] rounded-full hover:bg-[#FFB849] disabled:opacity-50 transition-colors flex items-center gap-2 font-bold"
+            className="group w-full md:w-auto px-6 md:px-8 py-3 md:py-4 bg-[#FF9F1C] text-[#2D3047] rounded-full hover:bg-[#FFB849] disabled:opacity-50 transition-colors flex items-center justify-center gap-2 font-bold"
           >
             {loading ? (
               <><Loader2 className="animate-spin" size={20} /> searching...</>
@@ -129,61 +129,56 @@ export default function Home() {
 
         {/* Error Message */}
         {error && (
-          <div className="mt-4 p-4 bg-[#E63946] text-white rounded-lg text-center">
+          <div className="mt-4 p-4 bg-[#E63946] text-white rounded-lg text-center text-sm md:text-base">
             {error}
           </div>
         )}
       </div>
 
-     {/* Track and Results Section */}
-     {(recommendations.length > 0 || (data?.answer && !loading)) && (
-        <div className="relative max-w-3xl mx-auto flex-1 min-h-[500px] mb-24">
+      {/* Track and Results Section */}
+      {(recommendations.length > 0 || (data?.answer && !loading)) && (
+        <div className="relative max-w-3xl mx-auto flex-1 min-h-[500px] mb-16 md:mb-24">
           {/* Track Container */}
-          <div className="absolute -inset-20 -rotate-6">
-            {/* Main Track Outline */}
-            <div className="absolute inset-0 rounded-[200px] overflow-hidden" />
-            
+          <div className="absolute -inset-8 md:-inset-20 -rotate-6">
             {/* Lane Lines - now in orange with decreasing opacity */}
             {[...Array(6)].map((_, i) => (
               <div
                 key={i}
-                className="absolute border-[3px] rounded-[200px]"
+                className="absolute border-[2px] md:border-[3px] rounded-[200px]"
                 style={{
-                  top: `${8 + (i * 12)}px`,
-                  right: `${8 + (i * 12)}px`,
-                  bottom: `${8 + (i * 12)}px`,
-                  left: `${8 + (i * 12)}px`,
-                  borderColor: `rgba(176, 51, 17, ${0.7 - i * 0.1})`,
+                  top: `${i * 12}px`,
+                  right: `${i * 12}px`,
+                  bottom: `${i * 12}px`,
+                  left: `${i * 12}px`,
+                  borderColor: `rgba(176, 51, 17, ${0.7 - i * 0.1})`
                 }}
               />
             ))}
-
           </div>
           
-          {/* Results Container - adjusted to fit oval */}
-          <div className="relative mx-12 bg-[#1F2132]/90 backdrop-blur-sm rounded-[60px] p-8 shadow-2xl">
-            {/* Rest of the content remains the same */}
+          {/* Results Container */}
+          <div className="relative mx-4 md:mx-12 bg-[#1F2132]/90 backdrop-blur-sm rounded-3xl md:rounded-[60px] p-4 md:p-8 shadow-2xl">
             {/* No recommendations message */}
             {!loading && recommendations.length === 0 && data?.answer && (
-              <div className="min-h-[400px] text-[#E4D9FF] flex items-center justify-center text-center text-lg p-8">
+              <div className="min-h-[300px] md:min-h-[400px] text-[#E4D9FF] flex items-center justify-center text-center text-base md:text-lg p-4 md:p-8">
                 {data.answer}
               </div>
             )}
 
             {/* Recommendations */}
             {recommendations.length > 0 && (
-              <div className="space-y-8">
+              <div className="space-y-6 md:space-y-8">
                 {/* Recommendations Cards */}
-                <div className="grid gap-6">
+                <div className="grid gap-4 md:gap-6">
                   {recommendations.map((rec, idx) => (
                     <div 
                       key={idx} 
-                      className="bg-[#2D3047] p-6 rounded-2xl border-2 border-[#FF9F1C]/20 hover:border-[#FF9F1C]/40 transition-colors"
+                      className="bg-[#2D3047] p-4 md:p-6 rounded-xl md:rounded-2xl border-2 border-[#FF9F1C]/20 hover:border-[#FF9F1C]/40 transition-colors"
                     >
-                      <h3 className="text-[#FF9F1C] text-xl font-bold mb-3">
+                      <h3 className="text-[#FF9F1C] text-lg md:text-xl font-bold mb-2 md:mb-3">
                         {rec.model}
                       </h3>
-                      <p className="text-[#E4D9FF] leading-relaxed">
+                      <p className="text-[#E4D9FF] leading-relaxed text-sm md:text-base">
                         {rec.description}
                       </p>
                     </div>
@@ -192,9 +187,9 @@ export default function Home() {
 
                 {/* Sources Section */}
                 {data?.sources && data.sources.length > 0 && (
-                  <div className="pt-8 border-t-2 border-[#FF9F1C]/20">
-                    <h3 className="text-[#FF9F1C] font-bold mb-4">you might find these videos interesting:</h3>
-                    <ul className="space-y-3">
+                  <div className="pt-6 md:pt-8 border-t-2 border-[#FF9F1C]/20">
+                    <h3 className="text-[#FF9F1C] font-bold mb-3 md:mb-4 text-sm md:text-base">you might find these videos interesting:</h3>
+                    <ul className="space-y-2 md:space-y-3">
                       {data.sources.map((source, idx) => (
                         <li key={idx} className="flex items-start gap-2 group">
                           <ExternalLink size={16} className="mt-1 flex-shrink-0 text-[#FF9F1C]" />
@@ -202,7 +197,7 @@ export default function Home() {
                             href={`https://youtube.com/watch?v=${source.video_id}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-sm text-[#E4D9FF] group-hover:text-[#FF9F1C] transition-colors"
+                            className="text-xs md:text-sm text-[#E4D9FF] group-hover:text-[#FF9F1C] transition-colors"
                           >
                             {source.title.toLowerCase()}
                           </a>
