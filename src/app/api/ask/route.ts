@@ -62,7 +62,9 @@ export async function POST(request: Request) {
     console.log('Match scores:', queryResponse.matches?.map(m => ({
       score: m.score,
       title: m.metadata?.title,
-      snippet: m.metadata?.chunk_text?.slice(0, 100) + '...'
+      snippet: typeof m.metadata?.chunk_text === 'string' ? 
+      m.metadata.chunk_text.slice(0, 100) + '...' : 
+      'No text available'
     })));
 
     // Filter matches based on score
