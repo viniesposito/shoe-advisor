@@ -59,8 +59,27 @@ export async function POST(request: Request) {
       includeMetadata: true
     });
 
+    console.log('Match scores:', queryResponse.matches?.map(m => ({
+      score: m.score,
+      title: m.metadata?.title,
+      snippet: m.metadata?.chunk_text?.slice(0, 100) + '...'
+    })));
+
+    // Filter matches based on score
+    const SIMILARITY_THRESHOLD = 0.3;  // Adjust this value as needed
+    const relevantMatches = queryResponse.matches?.filter(match => match.score && match.score > SIMILARITY_THRESHOLD) || [];
+
+    // Check if we found any relevant matches
+    if (relevantMatches.length === 0) {
+      console.log('No relevant matches found (similarity scores too low)');
+      return NextResponse.json({
+        answer: "I couldn't find any relevant shoe recommendations based on your query. could you please try inputting a different shoe?",
+        sources: []
+      });
+    }
+
     // Prepare context from relevant chunks
-    const context = queryResponse.matches
+    const context = relevantMatches
       .map(match => match.metadata?.chunk_text || '')
       .join('\n\n');
     
