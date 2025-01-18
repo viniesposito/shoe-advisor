@@ -150,9 +150,9 @@ export default function Home() {
 
       {/* Track and Results Section */}
       {(recommendations.length > 0 || (data?.answer && !loading)) && (
-        <div className="relative max-w-3xl mx-auto flex-1 min-h-[500px] mb-16 md:mb-24">
+        <div className="relative max-w-2xl mx-auto flex-1 min-h-[500px] mb-16 md:mb-24">
           {/* Track Container */}
-          <div className="absolute -inset-8 md:-inset-20 -rotate-6">
+          <div className="absolute max-w-xl mx-auto -inset-8 md:-inset-20 -rotate-6">
             {/* Lane Lines - now in orange with decreasing opacity */}
             {[...Array(6)].map((_, i) => (
               <div
@@ -170,7 +170,7 @@ export default function Home() {
           </div>
 
           {/* Results Container */}
-          <div className="relative mx-4 md:mx-12 bg-[#1F2132]/90 backdrop-blur-sm rounded-3xl md:rounded-[60px] p-4 md:p-8 shadow-2xl">
+          <div className="relative mx-4 md:mx-12 bg-[#1F2132]/15 backdrop-blur-sm rounded-3xl md:rounded-[60px] p-4 md:p-8 shadow-2xl">
             {/* No recommendations message */}
             {!loading && recommendations.length === 0 && data?.answer && (
               <div className="min-h-[300px] md:min-h-[400px] text-[#E4D9FF] flex items-center justify-center text-center text-base md:text-lg p-4 md:p-8">
@@ -188,10 +188,10 @@ export default function Home() {
                       key={idx}
                       className="bg-[#2D3047] p-4 md:p-6 rounded-xl md:rounded-2xl border-2 border-[#FF9F1C]/20 hover:border-[#FF9F1C]/40 transition-colors"
                     >
-                      <h3 className="text-[#FF9F1C] text-lg md:text-xl font-bold mb-2 md:mb-3">
+                      <h3 className="text-[#FF9F1C] text-md md:text-lg font-bold mb-2 md:mb-3">
                         {rec.model}
                       </h3>
-                      <p className="text-[#E4D9FF] leading-relaxed text-sm md:text-base">
+                      <p className="text-[#E4D9FF] leading-relaxed text-sm md:text-sm">
                         {rec.description}
                       </p>
                     </div>
