@@ -45,3 +45,4 @@ data/
 processed_chunks/
 query_cache/
 debug.log
+repomix-output.txt
