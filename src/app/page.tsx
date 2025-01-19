@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { Loader2, ExternalLink } from "lucide-react";
 import { ShoeIcon } from "./components/ShoeIcon";
+import Link from "next/link";
 
 interface Recommendation {
   model: string;
@@ -224,9 +225,30 @@ export default function Home() {
                     </ul>
                   </div>
                 )}
+                {/* About Link */}
+                <div className="pt-6 md:pt-8 border-t-2 border-[#FF9F1C]/20 text-center">
+                  <Link
+                    href="/about"
+                    className="text-[#ff8884] hover:text-[#fff8f0] transition-colors text-sm"
+                  >
+                    how does this work?
+                  </Link>
+                </div>
               </div>
             )}
           </div>
+        </div>
+      )}
+
+      {/* About Link for Empty State */}
+      {!recommendations.length && !data?.answer && !loading && (
+        <div className="text-center mt-8">
+          <Link
+            href="/about"
+            className="px-4 py-2 text-xs bg-[#1F2132] text-[#ff8884] rounded-full border border-[#ff8884] hover:bg-[#ff8884] hover:text-[#1F2132] transition-colors duration-200"
+          >
+            how does this work?
+          </Link>
         </div>
       )}
     </main>
