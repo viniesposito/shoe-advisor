@@ -98,11 +98,11 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-[#2D3047] px-4 py-4 font-mono lowercase flex flex-col">
       {/* Title Section */}
-      <div className="max-w-2xl mx-auto text-center mb-8 md:mb-12">
-        <h1 className="text-2xl md:text-4xl font-bold mb-3 md:mb-4 text-[#FF9F1C]">
+      <div className="max-w-2xl mx-auto text-center mb-8">
+        <h1 className="text-2xl font-bold mb-3 text-[#FF9F1C]">
           running shoe finder
         </h1>
-        <p className="text-[#E4D9FF] text-base md:text-md">
+        <p className="text-[#E4D9FF] text-sm">
           enter your favorite shoes, discover your next pair.
         </p>
       </div>
@@ -118,7 +118,7 @@ export default function Home() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="nike pegasus, brooks ghost..."
-            className="w-full md:flex-1 px-4 md:px-6 py-3 md:py-4 rounded-full border-2 border-[#FF9F1C] bg-[#1F2132] text-white placeholder:text-[#E4D9FF]/50 focus:outline-none focus:ring-2 focus:ring-[#FF9F1C] focus:border-transparent text-base"
+            className="w-full md:flex-1 px-4 md:px-6 py-3 rounded-full border-2 border-[#FF9F1C] bg-[#1F2132] text-white placeholder:text-[#E4D9FF]/50 focus:outline-none focus:ring-2 focus:ring-[#FF9F1C] focus:border-transparent text-sm"
             disabled={loading}
           />
           <button
@@ -192,7 +192,7 @@ export default function Home() {
                       <h3 className="text-[#FF9F1C] text-md md:text-lg font-bold mb-2 md:mb-3">
                         {rec.model}
                       </h3>
-                      <p className="text-[#E4D9FF] leading-relaxed text-sm md:text-sm">
+                      <p className="text-[#E4D9FF] leading-relaxed text-xs">
                         {rec.description}
                       </p>
                     </div>
@@ -202,7 +202,7 @@ export default function Home() {
                 {/* Sources Section */}
                 {data?.sources && data.sources.length > 0 && (
                   <div className="pt-6 md:pt-8 border-t-2 border-[#FF9F1C]/20">
-                    <h3 className="text-[#FF9F1C] font-bold mb-3 md:mb-4 text-sm md:text-base">
+                    <h3 className="text-[#FF9F1C] font-bold mb-3 md:mb-4 text-sm">
                       you might find these videos interesting:
                     </h3>
                     <ul className="space-y-2 md:space-y-3">
