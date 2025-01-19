@@ -96,7 +96,7 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-[#2D3047] px-4 py-8 md:py-12 font-mono lowercase flex flex-col">
+    <main className="min-h-screen bg-[#2D3047] px-4 py-4 font-mono lowercase flex flex-col">
       {/* Title Section */}
       <div className="max-w-2xl mx-auto text-center mb-8 md:mb-12">
         <h1 className="text-2xl md:text-4xl font-bold mb-3 md:mb-4 text-[#FF9F1C]">
