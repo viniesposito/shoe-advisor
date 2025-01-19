@@ -3,7 +3,7 @@
 I was spending too much time watching running shoe reviews on YouTube so I had GPT watch all of them so you don't have to.
 
 <p align="center"> 
-    <img src="/assets/app_screnshot.png" width="200">
+    <img src="/assets/app_screnshot.png" width="350">
 </p>
 
 ## Features
